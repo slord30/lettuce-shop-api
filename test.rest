@@ -1,0 +1,16 @@
+### GET all lists
+GET http://localhost:3000/lists
+
+### GET a single list by ID (Replace with a real ID after connecting)
+GET http://localhost:3000/lists/65f1a2b3c4d5e6f7a8b9c0d1
+
+### GET all lists for a specific user (Replace with a real User ID)
+GET http://localhost:3000/lists/user/65f1a2b3c4d5e6f7a8b9c0d2
+
+---
+
+### GET all stores
+GET http://localhost:3000/stores
+
+### GET a single store by ID (Replace with a real ID after connecting)
+GET http://localhost:3000/stores/65f1a2b3c4d5e6f7a8b9c0d3
