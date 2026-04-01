@@ -33,4 +33,21 @@ const getListsByUser = async (req, res) => {
   }
 };
 
-module.exports = { getAllLists, getSingleList, getListsByUser };
+const deleteList = async(req, res, next) => {
+    //#swagger.tags =['lists']
+    try {
+        const deletedlist = await List.findByIdAndDelete(req.params.id);
+
+        if (!deletedlist) {
+            res.status(404);
+            throw new Error('List not found' );
+        }
+
+        res.status(200).json({ message: 'List deleted' });
+    } catch (err) {
+        res.status(500);
+        next(err);
+    }
+};
+
+module.exports = { getAllLists, getSingleList, getListsByUser, deleteList };

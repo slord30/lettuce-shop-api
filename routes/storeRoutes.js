@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getAllStores, getSingleStore } = require('../controllers/storeController');
+const storeController = require('../controllers/storeController');
 
 /**
  * @swagger
@@ -12,7 +12,7 @@ const { getAllStores, getSingleStore } = require('../controllers/storeController
  *       200:
  *         description: List of all stores
  */
-router.get('/', getAllStores);
+router.get('/', storeController.getAllStores);
 
 /**
  * @swagger
@@ -32,6 +32,9 @@ router.get('/', getAllStores);
  *       404:
  *         description: Store not found
  */
-router.get('/:id', getSingleStore);
+router.get('/:id', storeController.getSingleStore);
+
+
+router.delete>('/:id', storeController.deleteStore);
 
 module.exports = router;

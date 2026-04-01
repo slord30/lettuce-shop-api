@@ -19,4 +19,21 @@ const getSingleStore = async (req, res) => {
   }
 };
 
-module.exports = { getAllStores, getSingleStore };
+const deleteStore = async(req, res, next) => {
+    //#swagger.tags =['stores']
+    try {
+        const deletedStore = await Store.findByIdAndDelete(req.params.id);
+
+        if (!deletedStore) {
+            res.status(404);
+            throw new Error('Store not found' );
+        }
+
+        res.status(200).json({ message: 'Store deleted' });
+    } catch (err) {
+        res.status(500);
+        next(err);
+    }
+};
+
+module.exports = { getAllStores, getSingleStore, deleteStore };

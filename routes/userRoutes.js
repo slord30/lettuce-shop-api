@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getAllUsers, getSingleUser } = require('../controllers/userController');
+const userController = require('../controllers/userController');
 
 /**
  * @swagger
@@ -12,7 +12,7 @@ const { getAllUsers, getSingleUser } = require('../controllers/userController');
  *       200:
  *         description: List of all users
  */
-router.get('/', getAllUsers);
+router.get('/', userController.getAllUsers);
 
 /**
  * @swagger
@@ -32,6 +32,9 @@ router.get('/', getAllUsers);
  *       404:
  *         description: User not found
  */
-router.get('/:id', getSingleUser);
+router.get('/:id', userController.getSingleUser);
+
+
+router.delete('/:id', userController.deleteUser);
 
 module.exports = router;

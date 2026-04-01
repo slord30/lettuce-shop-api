@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getAllItems, getSingleItem } = require('../controllers/itemController');
+const itemController = require('../controllers/itemController');
 
 /**
  * @swagger
@@ -12,7 +12,7 @@ const { getAllItems, getSingleItem } = require('../controllers/itemController');
  *       200:
  *         description: List of all items
  */
-router.get('/', getAllItems);
+router.get('/', itemController.getAllItems);
 
 /**
  * @swagger
@@ -32,6 +32,9 @@ router.get('/', getAllItems);
  *       404:
  *         description: Item not found
  */
-router.get('/:id', getSingleItem);
+router.get('/:id', itemController.getSingleItem);
+
+
+router.delete('/:id', itemController.deleteItem);
 
 module.exports = router;

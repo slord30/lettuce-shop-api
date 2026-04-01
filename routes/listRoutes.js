@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getAllLists, getSingleList, getListsByUser } = require('../controllers/listController');
+const listController = require('../controllers/listController');
 
 /**
  * @swagger
@@ -12,7 +12,7 @@ const { getAllLists, getSingleList, getListsByUser } = require('../controllers/l
  *       200:
  *         description: List of all lists
  */
-router.get('/', getAllLists);
+router.get('/', listController.getAllLists);
 
 /**
  * @swagger
@@ -32,7 +32,7 @@ router.get('/', getAllLists);
  *       404:
  *         description: List not found
  */
-router.get('/:id', getSingleList);
+router.get('/:id', listController.getSingleList);
 
 /**
  * @swagger
@@ -52,6 +52,8 @@ router.get('/:id', getSingleList);
  *       404:
  *         description: User not found
  */
-router.get('/user/:userId', getListsByUser);
+router.get('/user/:userId', listController.getListsByUser);
+
+router.delete('/:id', listController.deleteList);
 
 module.exports = router;

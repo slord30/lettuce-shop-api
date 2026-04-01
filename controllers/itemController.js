@@ -19,4 +19,21 @@ const getSingleItem = async (req, res) => {
   }
 };
 
-module.exports = { getAllItems, getSingleItem };
+const deleteItem = async(req, res, next) => {
+    //#swagger.tags =['items']
+    try {
+        const deletedItem = await Item.findByIdAndDelete(req.params.id);
+
+        if (!deletedUser) {
+            res.status(404);
+            throw new Error('Item not found' );
+        }
+
+        res.status(200).json({ message: 'Item deleted' });
+    } catch (err) {
+        res.status(500);
+        next(err);
+    }
+};
+
+module.exports = { getAllItems, getSingleItem, deleteItem };
