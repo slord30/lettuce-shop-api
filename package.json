@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "CSE341-team project",
   "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+"scripts": {
+    "test": "jest --testPathPatterns=tests --forceExit",
     "start": "node server.js"
-  },
+},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/KristinLind/lettuce-shop-api.git"
