@@ -1,10 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController');
+const { userValidationRules, validate } = require('../middleware/validate');
+const { ensureAuthenticated } = require('../middleware/auth');
 
 /**
  * @swagger
- * /users:
+ * /Users:
  *   get:
  *     summary: Get all users
  *     tags: [Users]
@@ -16,13 +18,13 @@ const userController = require('../controllers/userController');
  *                  schema:
  *                      type: array
  *                      items:
- *                      $ref: '#/components/schemas/User'
+ *                          $ref: '#/components/schemas/User'
  */
 router.get('/', userController.getAllUsers);
 
 /**
  * @swagger
- * /users/{id}:
+ * /Users/{id}:
  *   get:
  *     summary: Get a single user by ID
  *     tags: [Users]
@@ -40,7 +42,7 @@ router.get('/', userController.getAllUsers);
  *                  schema:
  *                      type: array
  *                      items:
- *                      $ref: '#/components/schemas/User'
+ *                          $ref: '#/components/schemas/User'
  *       404:
  *         description: User not found
  */
@@ -62,7 +64,7 @@ router.get('/:id', userController.getSingleUser);
  *       201:
  *         description: User created
  */
-router.post('/', userController.createUser); // ✅ matches our resolved controller
+router.post('/', ensureAuthenticated, userValidationRules(), validate, userController.createUser); // ✅ matches our resolved controller
 
 /**
  * @swagger
@@ -82,7 +84,7 @@ router.post('/', userController.createUser); // ✅ matches our resolved control
  *       404:
  *         description: User not found
  */
-router.put('/:id', userController.updateUser); // ✅ fixed from router.post
+router.put('/:id', ensureAuthenticated, userValidationRules(), validate, userController.updateUser); // ✅ fixed from router.post
 
 /**
  * @swagger
@@ -102,6 +104,6 @@ router.put('/:id', userController.updateUser); // ✅ fixed from router.post
  *       404:
  *         description: User not found
  */
-router.delete('/:id', userController.deleteUser);
+router.delete('/:id', ensureAuthenticated, userController.deleteUser);
 
 module.exports = router;

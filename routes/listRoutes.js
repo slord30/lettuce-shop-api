@@ -1,10 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const listController = require('../controllers/listController');
+const { listValidationRules, validate } = require('../middleware/validate');
+const { ensureAuthenticated } = require('../middleware/auth');
 
 /**
  * @swagger
- * /lists:
+ * /Lists:
  *   get:
  *     summary: Get all lists
  *     tags: [Lists]
@@ -16,13 +18,13 @@ const listController = require('../controllers/listController');
  *                  schema:
  *                      type: array
  *                      items:
- *                      $ref: '#/components/schemas/List'
+ *                          $ref: '#/components/schemas/List'
  */
 router.get('/', listController.getAllLists);
 
 /**
  * @swagger
- * /lists/{id}:
+ * /Lists/{id}:
  *   get:
  *     summary: Get a single list by ID
  *     tags: [Lists]
@@ -40,7 +42,7 @@ router.get('/', listController.getAllLists);
  *                  schema:
  *                      type: array
  *                      items:
- *                      $ref: '#/components/schemas/List'
+ *                          $ref: '#/components/schemas/List'
  *       404:
  *         description: List not found
  */
@@ -48,7 +50,7 @@ router.get('/:id', listController.getSingleList);
 
 /**
  * @swagger
- * /lists/user/{userId}:
+ * /Lists/user/{userId}:
  *   get:
  *     summary: Get all lists for a specific user
  *     tags: [Lists]
@@ -66,13 +68,11 @@ router.get('/:id', listController.getSingleList);
  *                  schema:
  *                      type: array
  *                      items:
- *                      $ref: '#/components/schemas/List'
+ *                          $ref: '#/components/schemas/List'
  *       404:
  *         description: User not found
  */
 router.get('/user/:userId', listController.getListsByUser);
-// POST: Create a new list
-router.post('/', listController.createList);
 
 /**
  * @swagger
@@ -90,7 +90,7 @@ router.post('/', listController.createList);
  *       201:
  *         description: List created
  */
-router.post('/', listController.createList);
+router.post('/', ensureAuthenticated, listValidationRules(), validate, listController.createList);
 
 /**
  * @swagger
@@ -110,7 +110,7 @@ router.post('/', listController.createList);
  *       404:
  *         description: list not found
  */
-router.put('/:id', listController.updateList);
+router.put('/:id', ensureAuthenticated, listValidationRules(), validate, listController.updateList);
 
 /**
  * @swagger
@@ -130,6 +130,8 @@ router.put('/:id', listController.updateList);
  *       404:
  *         description: List not found
  */ 
-router.delete('/:id', listController.deleteList);
+
+
+router.delete('/:id', ensureAuthenticated, listController.deleteList);
 
 module.exports = router;
