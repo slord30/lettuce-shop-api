@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const listController = require('../controllers/listController');
 const { listValidationRules, validate } = require('../middleware/validate');
-const { ensureAuthenticated } = require('../middleware/validate');
+const { ensureAuthenticated } = require('../middleware/auth');
 
 /**
  * @swagger
