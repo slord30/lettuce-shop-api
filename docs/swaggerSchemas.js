@@ -1,6 +1,6 @@
 const schemas = {
     item: {
-        type:'object',
+        type: 'object',
         properties: {
             _id: { type: 'string' },
             name: { type: 'string' },
@@ -22,7 +22,7 @@ const schemas = {
             user: { type: 'string' },
             items: {
                 type: 'array',
-                items: { type: 'string' },
+                items: { type: 'string' }
             },
             notes: { type: 'string' },
             createdAt: { type: 'string', format: 'date-time' },
@@ -31,7 +31,7 @@ const schemas = {
     },
     store: {
         type: 'object',
-        properties:{
+        properties: {
             _id: { type: 'string' },
             name: { type: 'string' },
             address: { type: 'string' },
@@ -50,7 +50,7 @@ const schemas = {
             displayName: { type: 'string' },
             email: { type: 'string' },
             createdAt: { type: 'string', format: 'date-time' },
-            updatedAt: { type: 'string', format: 'date-time' },
+            updatedAt: { type: 'string', format: 'date-time' }
         }
     }
 };
