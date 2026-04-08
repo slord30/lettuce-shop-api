@@ -1,6 +1,6 @@
 const schemas = {
-    Item: {
-        type:'object',
+    item: {
+        type: 'object',
         properties: {
             _id: { type: 'string' },
             name: { type: 'string' },
@@ -14,8 +14,7 @@ const schemas = {
             updatedAt: { type: 'string', format: 'date-time' }
         }
     },
-
-    List: {
+    list: {
         type: 'object',
         properties: {
             _id: { type: 'string' },
@@ -23,17 +22,16 @@ const schemas = {
             user: { type: 'string' },
             items: {
                 type: 'array',
-                items: { type: 'string' },
+                items: { type: 'string' }
             },
             notes: { type: 'string' },
             createdAt: { type: 'string', format: 'date-time' },
             updatedAt: { type: 'string', format: 'date-time' }
         }
     },
-
-    Store: {
+    store: {
         type: 'object',
-        properties:{
+        properties: {
             _id: { type: 'string' },
             name: { type: 'string' },
             address: { type: 'string' },
@@ -43,8 +41,7 @@ const schemas = {
             updatedAt: { type: 'string', format: 'date-time' }
         }
     },
-
-    User: {
+    user: {
         type: 'object',
         properties: {
             _id: { type: 'string' },
@@ -53,9 +50,8 @@ const schemas = {
             displayName: { type: 'string' },
             email: { type: 'string' },
             createdAt: { type: 'string', format: 'date-time' },
-            updatedAt: { type: 'string', format: 'date-time' },
+            updatedAt: { type: 'string', format: 'date-time' }
         }
     }
 };
-
 module.exports = schemas;
